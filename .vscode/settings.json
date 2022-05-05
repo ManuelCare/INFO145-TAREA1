@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "iosfwd": "cpp",
+        "xstring": "cpp",
+        "utility": "cpp",
+        "map": "cpp",
+        "xiosbase": "cpp",
+        "xtree": "cpp",
+        "string": "cpp",
+        "fstream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
