@@ -1,8 +1,10 @@
 CC=g++
 CFLAGS=-Wall -O3 -std=c++14
-BINS=Tarea
-all: clean Tarea
+BINS=Tarea HuffmanC
+all: clean Tarea HuffmanC
 
+HuffmanC:
+	$(CC) $(CFLAGS) -o HuffmanC huffman.cpp
 Tarea:
 	$(CC) $(CFLAGS) -o Tarea main.cpp
 
