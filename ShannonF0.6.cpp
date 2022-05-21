@@ -39,21 +39,23 @@ void Codificar(string DataNOM){
   fstream texto;  				// instrucciones para abrir el archivo en modo lectura
   texto.open(dir,ios::in);
   int i,n,z;
-
     if (texto.is_open()){ 		 	 // si el archivo se abrio (validacion para no tener errores)
       while(getline(texto, linea)){ //un while que itera por las lineas del texto dejandolas en la variable linea
         n=linea.length();
         for(i=0;i<n;i++){  		 //se recorre el string de largo n
             try{
                 freq[linea[i]]=freq[linea[i]]+1;    //se le anade +1 al valor del char que se esta leyendo si es que existe clave:valor (try)
+                
             }
             catch(exception e){
                 freq[linea[i]]=1;                   //se crea una clave:valor para el char que todavia no tiene (exception)
             }
         }
+        
       }
       texto.close();    						   //se cierra el texto a leer
     }
+  
   int pesoTotal=0;
   for (auto element :freq){ 					 //se itera por key:value del diccionario freq element.first = key, element.second =value
     pesoTotal+=element.second;   			// element.second es la frecuencia (valor) y se suma a pesoTotal para tener el numero total de caracteres
@@ -67,14 +69,15 @@ void Codificar(string DataNOM){
 		p[i].pro=((float)element.second)/pesoTotal;
 		i++; 		
   }
-
+  
   qsort(p, n, sizeof(node), comparaFreq);
   shannonF(0, n-1, p);
   printSimbolos(p, n);
+  
   /////////////////////////////////////////////
   ofstream TextoOutput ("codificado.txt");
   exportarCodigos(p, n);
-
+  
   texto.open(dir,ios::in);
   if (texto.is_open()){ 		 	 // si el archivo se abrio (validacion para no tener errores)
       while(getline(texto, linea)){ //un while que itera por las lineas del texto dejandolas en la variable linea
@@ -84,9 +87,9 @@ void Codificar(string DataNOM){
             TextoOutput << p[z].codigo;
         }
       }
-      TextoOutput << endl;
       texto.close();    						   //se cierra el texto a leer
   }
+  
   TextoOutput.close();
   /////////////////////////////////////////////
 };
@@ -108,7 +111,7 @@ void Decodificar(string DataNOM){
     p[i].codigo= (codificado).c_str();
     fgetc(CodigosImport);
   }
-  printSimbolos(p, n);
+  //printSimbolos(p, n);
   /////////////////////////////////////////////
   ofstream TextoOutput ("decodificado.txt");
 
@@ -157,15 +160,17 @@ void shannonF(int l, int r, node *p){
     p[r].codigo= p[r].codigo + "0";
   }
   else {
-  float sumaT=0, sumaP=p[l].pro;
+  float sumaT=0, sumaP=p[l].pro, sumaMitad;
   int i,z;
 
   for (i=l; i<=r; i++) {    sumaT += p[i].pro;  }
 
-  for (i=l; sumaP<=(sumaT/2);) {
+  sumaMitad = sumaT * 0.5f;
+  for (i=l; i<=r;) {
     p[i].codigo= p[i].codigo + "1";
     i++;
     sumaP += p[i].pro;
+    if (sumaP > sumaMitad) break;
   }
 
   for (z=i; z<=r ;z++) {
