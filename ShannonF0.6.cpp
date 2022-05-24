@@ -86,6 +86,7 @@ void Codificar(string DataNOM){
             for(z=0; linea[i] != p[z].sym; z++){}
             TextoOutput << p[z].codigo;
         }
+        TextoOutput << endl;
       }
       texto.close();    						   //se cierra el texto a leer
   }
@@ -130,6 +131,7 @@ void Decodificar(string DataNOM){
             }
           }
         }
+        TextoOutput << endl;
       }
     texto.close();    						   //se cierra el texto a leer
   }
@@ -156,8 +158,8 @@ void printSimbolos(node *p, int n){
 void shannonF(int l, int r, node *p){ 
   if(l==r) { return; }
   else if(r-l == 1){
-    p[l].codigo= p[l].codigo + "1";
-    p[r].codigo= p[r].codigo + "0";
+    p[l].codigo += "1";
+    p[r].codigo += "0";
   }
   else {
   float sumaT=0, sumaP=p[l].pro, sumaMitad;
