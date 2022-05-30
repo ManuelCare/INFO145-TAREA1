@@ -4,7 +4,7 @@ BINS=Tarea HuffmanC
 all: clean Tarea HuffmanC
 
 HuffmanC:
-	$(CC) $(CFLAGS) -o HuffmanC huffman.cpp
+	$(CC) $(CFLAGS) -o HuffmanC HuffmanCanonico.cpp 
 Tarea:
 	$(CC) $(CFLAGS) -o Tarea main.cpp
 
