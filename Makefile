@@ -6,7 +6,7 @@ all: clean Tarea HuffmanC
 HuffmanC:
 	$(CC) $(CFLAGS) -o HuffmanC HuffmanCanonico.cpp 
 Tarea:
-	$(CC) $(CFLAGS) -o Tarea main.cpp
+	$(CC) $(CFLAGS) -o Tarea ShannonF0.6.cpp
 
 clean:
 	@echo " [CLN] Removing binary files"
